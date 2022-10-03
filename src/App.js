@@ -1,13 +1,19 @@
+import React from "react";
+import Home from "./Components/Pages/Home";
+
+import 'bulma/css/bulma.css';
+import "animate.css";
 import './App.css';
 
-function App() {
-  return (
-    <div className="container">
-      <header className="header">
-        Done
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  render(){
+    return (
+        <div className="container is-fullh">
+          <Home />
+        </div>
+    );
+  }
+  
 }
 
 export default App;
