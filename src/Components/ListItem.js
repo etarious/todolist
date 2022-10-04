@@ -37,29 +37,40 @@ class ListItem extends React.Component {
     }
 
     render () {
-        const { title, details, time, id } = this.props.item;
+        // const { title, details, time, id } = this.props;
         let showDetail = this.state.showDetail
         let detail;
 
         if (showDetail) {
             detail = <div className='details'>
                         <hr />
-                        <p className="has-text-grey">{details}</p>
+                        <p className="has-text-grey">{this.props.details}</p>
                         <div className='sideInfo'>
-                            <small className='has-text-info'><i>{time.toLocaleTimeString()}</i></small>
-                            <Link to={`/edit/` + id } className='button is-link is-light is-small'><i className='fas fa-pen'></i> Edit</Link>
+                            <small className='has-text-info'><i>{this.props.time}</i></small>
+                            {this.props.deleteClickHandler ? <Link to={`/edit`} className='button is-link is-light is-small'><i className='fas fa-pen'></i> Edit</Link> : null}
                         </div>
                     </div>
         } else {
             detail = null
         }
 
+        // I need to add a conditional rendering for the check and delete button...
+        let action;
+        // console.log(this.props.deleteClickHandler);
+        if (this.props.deleteClickHandler) {
+            action = <span>
+                <i className='icons-item fas fa-check has-text-success'></i>
+                <i className='icons-item fas fa-trash has-text-danger' onClick={this.onDeleteClick} ></i>
+            </span>
+        } else {
+            action = null
+        }
+
         return (
             <div className='listItem card'>
-                <span className='subtitle'><strong>{title}</strong></span>
+                <span className='subtitle'><strong>{this.props.title}</strong></span>
                 <span className='icons'>
-                    <i className='icons-item fas fa-check has-text-success'></i>
-                    <i className='icons-item fas fa-trash has-text-danger' onClick={this.onDeleteClick} ></i>
+                    {action}
                     <i className='icons-item fas fa-sort-down' onClick={this.onShowClick} ></i>
                 </span>
                 {detail}
@@ -70,12 +81,14 @@ class ListItem extends React.Component {
 
 ListItem.defaultProps = {
     title: "Task",
-    details: "More details"
+    details: "More details",
+    time: "",
+    id: ""
 };
 
 ListItem.propTypes = {
-    item: PropTypes.object.isRequired,
-    deleteClickHandler: PropTypes.func.isRequired
+    item: PropTypes.object,
+    deleteClickHandler: PropTypes.func
 };
 
 export default ListItem;
