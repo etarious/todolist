@@ -2,7 +2,7 @@ import React from'react';
 import PropTypes from 'prop-types';
 import {Link} from 'react-router-dom';
 
-class ListItem extends React.Component {
+class CheckedListItem extends React.Component {
     constructor(props) {
         super(props);
 
@@ -85,16 +85,16 @@ class ListItem extends React.Component {
     }
 }
 
-ListItem.defaultProps = {
+CheckedListItem.defaultProps = {
     title: "Task",
     details: "More details",
     time: "",
     id: ""
 };
 
-ListItem.propTypes = {
+CheckedListItem.propTypes = {
     item: PropTypes.object,
     deleteClickHandler: PropTypes.func
 };
 
-export default ListItem;
+export default CheckedListItem;

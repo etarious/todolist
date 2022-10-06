@@ -4,7 +4,7 @@ import { createBrowserRouter, RouterProvider, Route } from 'react-router-dom';
 import './index.css';
 import App from './App';
 import ErrorPage from './Components/Pages/ErrorPage';
-import List from './Components/List';
+import Lists from './Components/Pages/Lists';
 import Add from './Components/Pages/Add';
 import reportWebVitals from './reportWebVitals';
 import CheckedList from './Components/Pages/CheckedList';
@@ -17,8 +17,8 @@ const router = createBrowserRouter([
     errorElement: <ErrorPage />
   },
   {
-    path: "list",
-    element: <List />
+    path: "lists",
+    element: <Lists />
   },
   {
     path: "add",

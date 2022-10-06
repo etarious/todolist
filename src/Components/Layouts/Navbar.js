@@ -25,7 +25,7 @@ class Navbar extends React.Component {
             <div className='navbar-end'>
               <div className='buttons'>
                 <Link to={`/checked`} className="button is-primary is-light" ><i className='fas fa-check'></i> Checked List</Link>
-                <Link to={`/add`} className="button is-primary is-dark" ><i className='fas fa-plus'></i> Add to List</Link>
+                <Link to={`/add`} className="button is-primary is-dark" ><i className='fas fa-plus'></i> Add Task</Link>
               </div>
             </div>
           </div>
