@@ -9,6 +9,7 @@ import Add from './Components/Pages/Add';
 import reportWebVitals from './reportWebVitals';
 import CheckedList from './Components/Pages/CheckedList';
 import EditList from './Components/Pages/EditList';
+import { Provider } from './listContext';
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider>
+      <RouterProvider router={router} />
+    </Provider>
   </React.StrictMode>
 );
 

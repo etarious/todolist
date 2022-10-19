@@ -8,9 +8,9 @@ import './App.css';
 class App extends React.Component {
   render(){
     return (
-        <div className="container is-fullh">
-          <Home />
-        </div>
+      <div className="container is-fullh">
+        <Home />
+      </div>
     );
   }
   
