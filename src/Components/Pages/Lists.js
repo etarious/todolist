@@ -6,36 +6,6 @@ import Footer from '../Layouts/Footer';
 import { Consumer } from '../../listContext';
 
 class Lists extends React.Component {
-
-    deleteItem = (id) => {
-        const { lists } = this.state;
-
-        let newLists = lists.filter(list => list.id !== id);
-
-        this.setState({
-            lists: newLists
-        });
-        console.log(lists);
-    }
-
-    itemChecked (id) {
-        const { lists } = this.state;
-
-        let newLists = [];
-
-        for (let i = 0; i < lists.length; i++) {
-            const list = lists[i];
-            if (list.id === id) {
-                list.checked = true;
-            }
-            newLists.push(list);
-        }
-
-        this.setState({
-            lists: newLists
-        });
-    }
-
     render () {
         return(
             <Consumer>
@@ -65,7 +35,7 @@ class Lists extends React.Component {
                     if (unCheckedLists.length > 0) {
                         listsDetails = <div>
                             {unCheckedLists.map(unCheckedList => (
-                                <ListItem key={unCheckedList.id} id={unCheckedList.id} title={unCheckedList.title} details={unCheckedList.details} time={unCheckedList.time.toLocaleTimeString()} deleteClickHandler={this.deleteItem.bind(this, unCheckedList.id)} checkClickHandler={this.itemChecked.bind(this, unCheckedList.id)} />
+                                <ListItem key={unCheckedList.id} id={unCheckedList.id} title={unCheckedList.title} details={unCheckedList.details} time={unCheckedList.time.toLocaleTimeString()} />
                             ))}
                         </div>
                     } else {

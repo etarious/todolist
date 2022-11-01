@@ -39,9 +39,8 @@ class ListItem extends React.Component {
         dispatch({type: "DELETE_ITEM", payload: id});
     }
 
-    onCheckClick () {
-        // console.log("working");
-        this.props.checkClickHandler();
+    onCheckClick (id, dispatch) {
+        dispatch({type: "CHECK_ITEM", payload: id});
     }
 
     render () {
@@ -50,7 +49,6 @@ class ListItem extends React.Component {
             <Consumer>
                 {value => {
                     const { dispatch } = value;
-                    // const { title, details, time, id } = this.props;
                     let showDetail = this.state.showDetail
                     let detail;
 
@@ -67,23 +65,12 @@ class ListItem extends React.Component {
                         detail = null
                     }
 
-                    // I need to add a conditional rendering for the check and delete button...
-                    let action;
-                    // console.log(this.props.deleteClickHandler);
-                    if (this.props.deleteClickHandler) {
-                        action = <span>
-                            <i className='icons-item fas fa-check has-text-success' onClick={this.onCheckClick}></i>
-                            <i className='icons-item fas fa-trash has-text-danger' onClick={this.onDeleteClick.bind(this, this.props.id, dispatch)} ></i>
-                        </span>
-                    } else {
-                        action = null
-                    }
-
                     return (
                         <div className='listItem card'>
                             <span className='subtitle'><strong>{this.props.title}</strong></span>
                             <span className='icons'>
-                                {action}
+                                <i className='icons-item fas fa-check has-text-success' onClick={this.onCheckClick.bind(this, this.props.id, dispatch)}></i>
+                                <i className='icons-item fas fa-trash has-text-danger' onClick={this.onDeleteClick.bind(this, this.props.id, dispatch)} ></i>
                                 <i className='icons-item fas fa-sort-down' onClick={this.onShowClick} ></i>
                             </span>
                             {detail}

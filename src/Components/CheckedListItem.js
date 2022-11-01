@@ -11,7 +11,7 @@ class CheckedListItem extends React.Component {
         };
 
         this.onShowClick = this.onShowClick.bind(this);
-        this.onCheckClick = this.onCheckClick.bind(this);
+        // this.onUncheckClick = this.onCheckClick.bind(this);
     }
 
     onShowClick(e){
@@ -26,24 +26,12 @@ class CheckedListItem extends React.Component {
             eClass.toggle("fa-sort-down");
         }
 
-        // console.log(e);
-
         this.setState({
             showDetail: !this.state.showDetail
         });
     }
 
-    onDeleteClick = () => {
-        this.props.deleteClickHandler();
-    }
-
-    onCheckClick () {
-        // console.log("working");
-        this.props.checkClickHandler();
-    }
-
     render () {
-        // const { title, details, time, id } = this.props;
         let showDetail = this.state.showDetail
         let detail;
 
@@ -53,30 +41,16 @@ class CheckedListItem extends React.Component {
                         <p className="has-text-grey">{this.props.details}</p>
                         <div className='sideInfo'>
                             <small className='has-text-info'><i>{this.props.time}</i></small>
-                            {this.props.deleteClickHandler ? <Link to={`/edit`} className='button is-link is-light is-small'><i className='fas fa-pen'></i> Edit</Link> : null}
                         </div>
                     </div>
         } else {
             detail = null
         }
 
-        // I need to add a conditional rendering for the check and delete button...
-        let action;
-        // console.log(this.props.deleteClickHandler);
-        if (this.props.deleteClickHandler) {
-            action = <span>
-                <i className='icons-item fas fa-check has-text-success' onClick={this.onCheckClick}></i>
-                <i className='icons-item fas fa-trash has-text-danger' onClick={this.onDeleteClick} ></i>
-            </span>
-        } else {
-            action = null
-        }
-
         return (
             <div className='listItem card'>
                 <span className='subtitle'><strong>{this.props.title}</strong></span>
                 <span className='icons'>
-                    {action}
                     <i className='icons-item fas fa-sort-down' onClick={this.onShowClick} ></i>
                 </span>
                 {detail}

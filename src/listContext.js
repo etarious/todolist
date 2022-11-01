@@ -3,12 +3,50 @@ import React from "react";
 const Context = React.createContext();
 
 const reducer = (state, action) => {
+    let { lists } = state;
+
     switch (action.type) {
         case "DELETE_ITEM":
             return {
                 ...state,
                 lists: state.lists.filter(list => list.id !== action.payload)
+            };
+
+        case "ADD_ITEM":
+            return {
+                ...state,
+                lists: [action.payload, ...state.lists]
+            };
+
+        case "CHECK_ITEM":
+
+            let newLists = [];
+
+            for (let i = 0; i < lists.length; i++) {
+                const list = lists[i];
+                if (list.id === action.payload) {
+                    list.checked = true;
+                }
+                newLists.push(list);
             }
+
+            return {
+                lists: newLists
+            };
+
+        case "CLEAR_ALL":
+            let unCheckedLists = [];
+
+            for (let i = 0; i < lists.length; i++) {
+                const list = lists[i];
+                if (!list.checked) {
+                    unCheckedLists.push(list);
+                }
+            }
+
+            return {
+                lists: unCheckedLists
+            };
     
         default:
             return state;
