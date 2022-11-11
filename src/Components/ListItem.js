@@ -2,7 +2,7 @@ import React from'react';
 import PropTypes from 'prop-types';
 import { Consumer } from "../listContext";
 
-import {Link} from 'react-router-dom';
+// import {Link} from 'react-router-dom';
 
 class ListItem extends React.Component {
     constructor(props) {
@@ -58,7 +58,11 @@ class ListItem extends React.Component {
                                     <p className="has-text-grey">{this.props.details}</p>
                                     <div className='sideInfo'>
                                         <small className='has-text-info'><i>{this.props.time}</i></small>
-                                        {this.props.deleteClickHandler ? <Link to={`/edit`} className='button is-link is-light is-small'><i className='fas fa-pen'></i> Edit</Link> : null}
+                                        <small>
+                                            {this.props.edit}
+                                            {/* <Link to={`/edit`} className='button is-link is-light is-small'><i className='fas fa-pen'></i> Edit</Link> */}
+                                            {/* {this.props.deleteClickHandler ? <Link to={`/edit`} className='button is-link is-light is-small'><i className='fas fa-pen'></i> Edit</Link> : null} */}
+                                        </small>
                                     </div>
                                 </div>
                     } else {

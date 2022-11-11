@@ -35,18 +35,20 @@ const reducer = (state, action) => {
             };
 
         case "CLEAR_ALL":
-            let unCheckedLists = [];
+            // let unCheckedLists = [];
 
-            for (let i = 0; i < lists.length; i++) {
-                const list = lists[i];
-                if (!list.checked) {
-                    unCheckedLists.push(list);
-                }
-            }
+            // for (let i = 0; i < lists.length; i++) {
+            //     const list = lists[i];
+            //     if (!list.checked) {
+            //         unCheckedLists.push(list);
+            //     }
+            // }
 
-            return {
-                lists: unCheckedLists
-            };
+            // return {
+            //     lists: unCheckedLists
+            // };
+            alert("Working");
+            break;
     
         default:
             return state;

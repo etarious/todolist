@@ -5,9 +5,18 @@ import Footer from '../Layouts/Footer';
 import { Consumer } from '../../listContext';
 
 class CheckedList extends React.Component{
+    constructor(props){
+        super(props);
 
-    clearAllClick = (dispatch) => {
-        dispatch({type: "CLEAR_ALL"});
+        this.clearAllClick = this.clearAllClick.bind(this);
+        // this.clear = document.getElementById("clear");
+    }
+
+    clearAllClick (dispatch) {
+        // dispatch({type: "CLEAR_ALL"});
+        console.log(dispatch);
+        // let clear = document.getElementById("clear");
+        console.log(this.clear);
     }
 
     render () {
@@ -18,6 +27,7 @@ class CheckedList extends React.Component{
 
                 let checkedItems = [];
                 let checkedDetails;
+                // let clear = document.getElementById("clear");
 
                 if (lists.length !== 0 && typeof lists === "object") {
                     for (let i = 0; i < lists.length; i++) {
@@ -50,16 +60,16 @@ class CheckedList extends React.Component{
                 }
 
                 return (
-                    <div>
+                    <>
                         <Link to={`/lists`} className="button is-success is-light" >Back to lists</Link>
                         <div className='lists'>
                             <h3 className='title has-text-danger'>CHECKED LISTS</h3>
                             <hr></hr>
                             {checkedDetails}
-                            <button className="button is-fullwidth button is-danger is-light has-text-danger"  onClick={this.clearAllClick(dispatch)} ><i className='icons-item fas fa-trash'></i> Clear List</button>
+                            <button className="button is-fullwidth button is-danger is-light has-text-danger" id='clear' onClick={console.log("Working")}><i className='icons-item fas fa-trash'></i> Clear List</button>
                         </div>
                         <Footer />
-                    </div>
+                    </>
                 )
             }}
         </Consumer>

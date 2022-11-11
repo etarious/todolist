@@ -2,6 +2,7 @@ import React from 'react';
 import Footer from '../Layouts/Footer';
 import { Link } from 'react-router-dom';
 import { Consumer } from '../../listContext';
+import TextInputGroup from "../Layouts/TextInputGroup";
 import { v4 as uuid } from 'uuid';
 
 class Add extends React.Component {
@@ -9,7 +10,8 @@ class Add extends React.Component {
         title: "",
         details: "",
         time: new Date(),
-        checked: false
+        checked: false,
+        errors: {}
     }
 
     onChange = e => this.setState({[e.target.name]: e.target.value});
@@ -19,10 +21,20 @@ class Add extends React.Component {
         // console.log(this.state);
         const { title, details, time, checked } = this.state;
 
+        // Check for errors...
+        if(title.trim() === ""){
+            this.setState({errors: {title: "Title is required"}});
+            return;
+        }
+        if(details.trim()=== ""){
+            this.setState({errors: {details: "Details is required"}});
+            return;
+        }
+
         const newItem = {
             id: uuid(),
-            title,
-            details,
+            title: title.trim(),
+            details: details.trim(),
             time,
             checked
         }
@@ -34,7 +46,8 @@ class Add extends React.Component {
             title: "",
             details: "",
             time: new Date(),
-            checked: false
+            checked: false,
+            errors: {}
         })
     }
 
@@ -54,7 +67,7 @@ class Add extends React.Component {
     // }
 
     render () {
-        const { title, details } = this.state;
+        const { title, details, errors } = this.state;
 
         return (
             <Consumer>
@@ -67,23 +80,9 @@ class Add extends React.Component {
                                 <h3 className='title has-text-danger'>ADD A NEW ITEM</h3>
                                 <hr></hr>
                                 <form onSubmit={this.onSubmit.bind(this, dispatch)}>
-                                    <div className="field">
-                                        <label className="label" htmlFor="title">Title</label>
-                                        <div className="control">
-                                            <input className="input" id='title' onChange={this.onChange} value={title} name='title' type="text" placeholder="Title of your task..." />
-                                        </div>
-                                    </div>
-                                    <div className="field">
-                                        <label className="label" htmlFor='details'>Description</label>
-                                        <div className="control">
-                                            <textarea className="input" id='details' onChange={this.onChange} value={details} style={{height: "150px"}} name='details' placeholder='Detailed descriptions of the titled task...' />
-                                        </div>
-                                    </div>
-                                    <div className='field'>
-                                        <div className='control'>
-                                            <input type="submit" className="button is-fullwidth button is-link is-success is-light has-text-succes" value="Add Task" />
-                                        </div>
-                                    </div>
+                                    <TextInputGroup elem="input" id="title" label='Title' onChange={this.onChange} value={title} name="title" type="text" placeholder="Title of your Task..." error={errors.title} />
+                                    <TextInputGroup elem="textarea" id="details" onChange={this.onChange} value={details} name="details" placeholder="Detailed descriptions of the titled task..." error={errors.details} />
+                                    <TextInputGroup type="submit" value="Add Task"/> 
                                 </form>
                                 {/* <div className="modal is-active is-clipped">
                                     <div className='modal-background' onClick={this.closeModal()}></div>
