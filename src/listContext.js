@@ -35,20 +35,20 @@ const reducer = (state, action) => {
             };
 
         case "CLEAR_ALL":
-            // let unCheckedLists = [];
+            let unCheckedLists = [];
 
-            // for (let i = 0; i < lists.length; i++) {
-            //     const list = lists[i];
-            //     if (!list.checked) {
-            //         unCheckedLists.push(list);
-            //     }
-            // }
+            for (let i = 0; i < lists.length; i++) {
+                const list = lists[i];
+                if (!list.checked) {
+                    unCheckedLists.push(list);
+                }
+            }
 
-            // return {
-            //     lists: unCheckedLists
-            // };
-            alert("Working");
-            break;
+            return {
+                lists: unCheckedLists
+            };
+            // alert("Working");
+            // break;
     
         default:
             return state;
@@ -61,6 +61,39 @@ export class Provider extends React.Component {
 
         this.state = {
             lists: [
+                // {
+                //     id: 1,
+                //     title: "Pray",
+                //     details: "Go before the throne of grace and obtain mercy.",
+                //     time: new Date(),
+                //     checked: false
+                // },
+                // {
+                //     id: 2,
+                //     title: "Bath",
+                //     details: "Cleanliness is next to godliness.",
+                //     time: new Date(),
+                //     checked: false
+                // },
+                // {
+                //     id: 3,
+                //     title: "Prepare",
+                //     details: "Probably wear cloth, comb my hair, eat, an so on...",
+                //     time: new Date(),
+                //     checked: false
+                // }
+            ],
+            dispatch: action => {
+                this.setState(state => reducer(state, action))
+            }
+        }
+    }
+
+    componentDidMount() {
+        let lists = window.localStorage.getItem("lists");
+        // console.log(lists);
+        if (lists === null) {
+            lists = [
                 {
                     id: 1,
                     title: "Pray",
@@ -82,11 +115,27 @@ export class Provider extends React.Component {
                     time: new Date(),
                     checked: false
                 }
-            ],
-            dispatch: action => {
-                this.setState(state => reducer(state, action))
+            ]
+            lists = JSON.stringify(lists);
+            window.localStorage.setItem("lists", lists);
+            // console.log(lists);
+        } else {
+            lists = JSON.parse(lists);
+            this.setState({lists: lists});
+            // console.log(lists);
+            for (let i = 0; i < lists.length; i++) {
+                let list = lists[i];
+                list.time = new Date(list.time)
             }
+            // console.log(lists);
         }
+        
+    }
+
+    componentDidUpdate() {
+        let lists = this.state.lists;
+        lists = JSON.stringify(lists);
+        window.localStorage.setItem("lists", lists);
     }
 
     render() {

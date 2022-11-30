@@ -13,10 +13,8 @@ class CheckedList extends React.Component{
     }
 
     clearAllClick (dispatch) {
-        // dispatch({type: "CLEAR_ALL"});
-        console.log(dispatch);
-        // let clear = document.getElementById("clear");
-        console.log(this.clear);
+        dispatch({type: "CLEAR_ALL"});
+        // console.log("working");
     }
 
     render () {
@@ -33,7 +31,7 @@ class CheckedList extends React.Component{
                     for (let i = 0; i < lists.length; i++) {
                         const list = lists[i];
                         
-                        if (list.checked === false) {
+                        if (list.checked === true) {
                             checkedItems.push(list);
                         }
                     }
@@ -66,7 +64,7 @@ class CheckedList extends React.Component{
                             <h3 className='title has-text-danger'>CHECKED LISTS</h3>
                             <hr></hr>
                             {checkedDetails}
-                            <button className="button is-fullwidth button is-danger is-light has-text-danger" id='clear' onClick={console.log("Working")}><i className='icons-item fas fa-trash'></i> Clear List</button>
+                            <button className="button is-fullwidth button is-danger is-light has-text-danger" id='clear' onClick={() => this.clearAllClick(dispatch)}><i className='icons-item fas fa-trash'></i> Clear List</button>
                         </div>
                         <Footer />
                     </>

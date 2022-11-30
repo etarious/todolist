@@ -35,7 +35,7 @@ class Lists extends React.Component {
                     if (unCheckedLists.length > 0) {
                         listsDetails = <div>
                             {unCheckedLists.map(unCheckedList => (
-                                <ListItem key={unCheckedList.id} id={unCheckedList.id} title={unCheckedList.title} details={unCheckedList.details} time={unCheckedList.time.toLocaleTimeString()} edit={<Link to={`/edit`} className='button is-link is-light is-small'><i className='fas fa-pen'></i> Edit</Link>} />
+                                <ListItem key={unCheckedList.id} id={unCheckedList.id} title={unCheckedList.title} details={unCheckedList.details} time={unCheckedList.time.toLocaleTimeString()} edit={<Link to={`/task/edit/${unCheckedList.id}`} className='button is-link is-light is-small'><i className='fas fa-pen'></i> Edit</Link>} />
                             ))}
                         </div>
                     } else {

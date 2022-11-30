@@ -30,7 +30,7 @@ const router = createBrowserRouter([
     element: <CheckedList />
   },
   {
-    path: "edit",
+    path: "task/edit/:id",
     element: <EditList />
   },
 ])
